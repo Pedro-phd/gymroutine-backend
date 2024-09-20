@@ -18,7 +18,10 @@ export class TrainingService {
   }
 
   findAll() {
-    return this.prisma.training.findMany({ include: { exercises: { select: { name: true, sets: true, id: true } } } });
+    return this.prisma.training.findMany({ include: { exercises: { select: { name: true, sets: true, id: true } } }, 
+      orderBy: {
+      day: 'desc'
+    } });
   }
 
   findByName(name: string) {
