@@ -9,6 +9,7 @@ async function bootstrap() {
     .setTitle('Gym Routine | Backend')
     .setDescription('Gym Routine API')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

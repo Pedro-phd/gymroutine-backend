@@ -14,6 +14,8 @@ model Training {
   day         DateTime   @default(now())
   exercises   Exercise[]
   description String?
+
+  userId String @default("")
 }
 
 model Exercise {
@@ -22,6 +24,8 @@ model Exercise {
   sets       Set[]
   training   Training? @relation(fields: [trainingId], references: [id])
   trainingId Int?
+
+  userId String @default("")
 }
 
 model Set {
@@ -32,4 +36,6 @@ model Set {
   description String?
   exercise    Exercise? @relation(fields: [exerciseId], references: [id])
   exerciseId  Int?
+
+  userId String @default("")
 }

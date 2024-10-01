@@ -1,27 +1,31 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { TrainingService } from './training.service';
 import { CreateTrainingDto } from './dto/create-training.dto';
 import { UpdateTrainingDto } from './dto/update-training.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
+import { User } from 'src/decorators/user.decorator';
 
 @ApiTags('Training')
 @Controller('training')
+@ApiBearerAuth()
+@UseGuards(AuthGuard('jwt'))
 export class TrainingController {
   constructor(private readonly trainingService: TrainingService) {}
 
   @Post()
-  create(@Body() createTrainingDto: CreateTrainingDto) {
-    return this.trainingService.create(createTrainingDto);
+  create(@Body() createTrainingDto: CreateTrainingDto, @User() user) {
+    return this.trainingService.create(createTrainingDto, user);
   }
 
   @Get()
-  findAll() {
-    return this.trainingService.findAll();
+  findAll(@User() user) {
+    return this.trainingService.findAll(user);
   }
 
   @Get(':name')
-  findByName(@Param('name') name: string) {
-    return this.trainingService.findByName(name);
+  findByName(@Param('name') name: string, @User() user) {
+    return this.trainingService.findByName(name, user);
   }
 
   // @Get(':date')
@@ -30,12 +34,12 @@ export class TrainingController {
   // }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTrainingDto: UpdateTrainingDto) {
-    return this.trainingService.update(+id, updateTrainingDto);
+  update(@Param('id') id: string, @Body() updateTrainingDto: UpdateTrainingDto, @User() user) {
+    return this.trainingService.update(+id, updateTrainingDto, user);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.trainingService.remove(+id);
+  remove(@Param('id') id: string, @User() user) {
+    return this.trainingService.remove(+id, user);
   }
 }
