@@ -1,0 +1,113 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Report</title>
+</head>
+
+<body>
+  <style type="text/css">
+    .tg {
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    .tg td {
+      border-style: solid;
+      border-width: 1px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      overflow: hidden;
+      padding: 10px 5px;
+      word-break: normal;
+    }
+
+    .tg th {
+      border-style: solid;
+      border-width: 1px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      font-weight: normal;
+      overflow: hidden;
+      padding: 10px 5px;
+      word-break: normal;
+    }
+
+    .tg .tg-1wig {
+      font-weight: bold;
+      text-align: left;
+      vertical-align: top
+    }
+
+    .tg .tg-atua {
+      text-align: left;
+      vertical-align: top
+    }
+
+    .tg .tg-fkgn {
+      text-align: left;
+      vertical-align: top
+    }
+  </style>
+  <style>
+    table {
+      width: 100%;
+      margin-bottom: 16px;
+    }
+  </style>
+  <img style="margin-bottom: 24px; width: 177px; height: 28px;" src="https://i.imgur.com/kXDDsgK.png" width="177px"
+    height="28px" />
+  <h1 style="margin-bottom: 12px;">Relatório</h1>
+  {{#each data}}
+  <table class="tg">
+    <thead>
+      <tr>
+        <th class="tg-1wig">Treino</th>
+        <th class="tg-1wig">Data</th>
+        <th class="tg-1wig">Descrição</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="tg-atua">{{name}}</td>
+        <td class="tg-atua">{{day}}</td>
+        <td class="tg-atua">{{description}}</td>
+      </tr>
+      <tr>
+        <td class="tg-fkgn" colspan="3">
+          <ul>
+            {{#each exercises}}
+            <li>
+              <p>Exercício: {{name}}</p>
+              <table class="tg">
+                <thead>
+                  <tr>
+                    <th class="tg-1wig">Tipo</th>
+                    <th class="tg-1wig">Peso</th>
+                    <th class="tg-1wig">Repetições</th>
+                    <th class="tg-1wig">Descrição</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each sets}}
+                  <tr>
+                    <td class="tg-atua">{{type}}</td>
+                    <td class="tg-atua">{{weight}}kg</td>
+                    <td class="tg-atua">{{reps}}</td>
+                    <td class="tg-atua">{{description}}</td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+            </li>
+            {{/each}}
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr />
+  {{/each}}
+</body>
+
+</html>
